@@ -1,0 +1,104 @@
+﻿@rendermode InteractiveServer
+
+<section class="subscribe">
+    <div class="container">
+        <div class="title">
+            <h1>Don't Want to Miss Anything?</h1>
+            <img class="decorArrows" src="images/decorArrows.svg" alt="decor">
+        </div>
+        <EditForm FormName="subscribe" Model="SubscribeForm" OnValidSubmit="OnValidSubmit" method="Post" novalidate>
+            <DataAnnotationsValidator />
+            <div class="checkbox-container">
+                <h5>Sign up for Newsletters</h5>
+
+                <div class="checkboxes">
+                    <div class="checkbox">
+                        <InputCheckbox @bind-Value = "SubscribeForm.DailyNewsletter" />
+                        <label>Daily Newsletter</label>
+                    </div>
+                   
+                    <div class="checkbox">
+                        <InputCheckbox @bind-Value="SubscribeForm.EventUpdates" />
+                        <label> Event Updates</label>
+                    </div>
+
+                    <div class="checkbox">
+                        <InputCheckbox @bind-Value="SubscribeForm.AdvertisingUpdates" />
+                        <label>Advertising Updates </label>
+                    </div>
+
+                    <div class="checkbox">
+                        <InputCheckbox @bind-Value="SubscribeForm.StartupsWeekly" />
+                        <label>Startups Weekly</label>
+                    </div>
+
+                    <div class="checkbox">
+                        <InputCheckbox @bind-Value="SubscribeForm.WeekInReview" />
+                        <label>Week In Review</label>
+                    </div>
+
+                    <div class="checkbox">
+                        <InputCheckbox @bind-Value="SubscribeForm.Podcasts" />
+                        <label>Podcasts</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="inputbox-container">
+                <div class="inputgroup">
+                    <InputText type="email" @bind-Value="SubscribeForm.Email" placeholder="Enter Your Email"/>
+                    <i class="fa-sharp fa-light fa-envelope"></i>
+                </div>
+                <div class="button">
+                    <button type="submit" class="btn-theme-s">Subscribe *</button>
+                </div>
+            </div>
+            <ValidationMessage For="@(() => SubscribeForm.Email)" class="alert-danger" />
+            <span class="status—message">@StatusMessage</span>
+
+        </EditForm>
+     </div>
+
+</section>
+
+@code {
+
+    [SupplyParameterFromQuery]
+    public string StatusMessage { get; set; } = "* Yes, I agree to the terms and privacy policy.";
+
+    [SupplyParameterFromForm]
+    public SubscribeFormModel SubscribeForm { get; set; } = new SubscribeFormModel();
+
+    private async Task OnValidSubmit()
+    {
+        try
+        {
+            var result = await Http.PostAsJsonAsync("https://subscriptionprovider-nor.azurewebsites.net/api/Subscribe?code=ZfkBj8Jj-p4ODchKZoz1FcPFL02eHmEfDTjPh6bMtsrPAzFuAU5QNg%3D%3D", SubscribeForm);
+            if (result.IsSuccessStatusCode)
+            {
+                StatusMessage = "Thank you For subscribing!";
+            }
+        }
+        catch
+        {
+            StatusMessage = "Subscription failed!, Please try again!";
+        }
+        SubscribeForm = new SubscribeFormModel();
+    }
+
+
+    public class SubscribeFormModel
+    {
+        [EmailAddress]
+        [Required(ErrorMessage = "You must provide an email address")]
+        [Display(Name = "E-mail address", Prompt = "Your Email")]
+        public string Email { get; set; } = null!;
+        public bool DailyNewsletter { get; set; }
+        public bool AdvertisingUpdates { get; set; }
+        public bool WeekInReview { get; set; }
+        public bool EventUpdates { get; set; }
+        public bool StartupsWeekly { get; set; }
+        public bool Podcasts { get; set; }
+    }
+
+}

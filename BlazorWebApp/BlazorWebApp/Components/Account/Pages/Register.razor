@@ -1,0 +1,159 @@
+﻿@page "/Account/Register"
+@rendermode InteractiveServer
+
+
+
+<PageTitle>Sign up</PageTitle>
+
+
+
+<section class="signup">
+    <div class="container">
+
+        @if (!string.IsNullOrEmpty(@StatusMessage))
+        {
+            <div class="alert alert-danger">
+                @StatusMessage
+            </div>
+        }
+
+        <EditForm FormName="signupform" Model="SignUpForm" OnValidSubmit="OnValidSubmit" method="post" novalidate>
+            <DataAnnotationsValidator />
+            <h1>Create Account</h1>
+            <p>Already have an account? <a href="/account/login">Sign in here</a></p>
+
+            <div class="form-content">
+                <div id="form-firstname" class="input-group">
+                    <label>First Name</label>
+                    <InputText @bind-Value="SignUpForm.FirstName" class="form-control" />
+                    <ValidationMessage For="() => SignUpForm.FirstName" />
+                </div>
+                <div id="form-lastname" class="input-group">
+                    <label>Last Name</label>
+                    <InputText @bind-Value="SignUpForm.LastName" class="form-control" />
+                    <ValidationMessage For="() => SignUpForm.LastName" />
+                </div>
+                <div id="form-email" class="input-group">
+                    <label>Email</label>
+                    <InputText @bind-Value="SignUpForm.Email" class="form-control" />
+                    <ValidationMessage For="() => SignUpForm.Email" />
+                </div>
+                <div id="form-password" class="input-group">
+                    <label>Password</label>
+                    <InputText @bind-Value="SignUpForm.Password" type="password" class="form-control" />
+                    <ValidationMessage For="() => SignUpForm.Password" />
+                </div>
+                <div id="form-confirmpassword" class="input-group">
+                    <label>Confirm Password</label>
+                    <InputText @bind-Value="SignUpForm.ConfirmPassword" type="password" class="form-control" />
+                    <ValidationMessage For="() => SignUpForm.ConfirmPassword" />
+                </div>
+                <div id="form-checkbox" class="checkbox-group">
+                    <div class="input-group">
+                        <InputCheckbox @bind-Value="SignUpForm.TermsAndConditions" />
+                        <label>I agree to the Terms & Conditions.</label>
+                    </div>
+                    <ValidationMessage For="() => SignUpForm.TermsAndConditions" />
+                </div>
+                <div id="form-button">
+                    <button type="submit" class="btn btn-theme"><i class="fa-regular fa-arrow-left-to-bracket"></i>Sign up</button>
+                </div>
+            </div>
+        </EditForm>
+
+    </div>
+</section>
+
+
+
+
+
+
+
+@code {
+
+    [SupplyParameterFromQuery]
+    private string? StatusMessage { get; set; } 
+
+    [SupplyParameterFromQuery]
+    private string? ReturnUrl { get; set; }
+
+    [SupplyParameterFromForm]
+    private SignUpFormModel SignUpForm { get; set; } = new SignUpFormModel();
+
+
+
+    public async Task OnValidSubmit(EditContext editContext)
+    {
+        var user = new ApplicationUser
+        {
+            UserProfile = new UserProfile
+            {
+                FirstName = SignUpForm.FirstName,
+                LastName = SignUpForm.LastName
+            },
+                UserName = SignUpForm.Email,
+                Email = SignUpForm.Email
+        };
+
+        var alreadyExists = await UserManager.FindByEmailAsync(SignUpForm.Email);
+        if (alreadyExists != null)
+        {
+            StatusMessage = "An account with this e—mail address already exists.";
+            return;
+        }
+
+        var result = await UserManager.CreateAsync(user, SignUpForm.Password);
+        if (!result.Succeeded)
+        {
+            StatusMessage = "Unable to register account. Please try again.";
+            return;
+        };
+
+        //OBS: I Can't access to my azure account!!!!!
+       // await Http.PostAsJsonAsync("AZURE----------------☠️☠️☠️☠️----------LINK HERE", SignUpForm);
+        if (UserManager.Options.SignIn.RequireConfirmedAccount)
+        {
+            RedirectManager.RedirectTo("Account/RegisterConfirmation", new() { ["email"] = SignUpForm.Email, ["returnUrl"] = ReturnUrl });
+        }
+
+        await SignInManager.SignInAsync(user, isPersistent: false);
+        RedirectManager.RedirectTo(ReturnUrl);
+    }
+
+
+  
+
+
+
+    public  class SignUpFormModel
+    {
+        [Required]
+        [Display(Name = "First name")]
+        public string FirstName { get; set; } = null!;
+
+        [Required]
+        [Display(Name = "Last name")]
+        public string LastName { get; set; } = null!;
+
+        [Required]
+        [Display(Name = "Email")]
+        [DataType(DataType.EmailAddress)]
+        public string Email { get; set; } = null!;
+
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public string Password { get; set; } = null!;
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirm password")]
+        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        public string ConfirmPassword { get; set; } = null!;
+
+        [Display(Name = "Terms & Conditions")]
+        public bool TermsAndConditions { get; set; }
+    }
+
+}
