@@ -13,6 +13,30 @@
 
   <ItemGroup>
     <None Include="compilerconfig.json" />
+    <None Include="wwwroot\scss\components\_buttons.scss" />
+    <None Include="wwwroot\scss\components\_forms.scss" />
+    <None Include="wwwroot\scss\components\_links.scss" />
+    <None Include="wwwroot\scss\core\_base.scss" />
+    <None Include="wwwroot\scss\core\_colors.scss" />
+    <None Include="wwwroot\scss\core\_media.scss" />
+    <None Include="wwwroot\scss\core\_typography.scss" />
+    <None Include="wwwroot\scss\sections\_account-details.scss" />
+    <None Include="wwwroot\scss\sections\_app-section.scss" />
+    <None Include="wwwroot\scss\sections\_courses-details.scss" />
+    <None Include="wwwroot\scss\sections\_courses.scss" />
+    <None Include="wwwroot\scss\sections\_features.scss" />
+    <None Include="wwwroot\scss\sections\_footer.scss" />
+    <None Include="wwwroot\scss\sections\_header.scss" />
+    <None Include="wwwroot\scss\sections\_lightanddark.scss" />
+    <None Include="wwwroot\scss\sections\_showcase.scss" />
+    <None Include="wwwroot\scss\sections\_signin.scss" />
+    <None Include="wwwroot\scss\sections\_signup.scss" />
+    <None Include="wwwroot\scss\sections\_subscribe.scss" />
+    <None Include="wwwroot\scss\sections\_work-management.scss" />
+    <None Include="wwwroot\scss\sections\_work-tools.scss" />
+    <None Include="wwwroot\scss\_components.scss" />
+    <None Include="wwwroot\scss\_core.scss" />
+    <None Include="wwwroot\scss\_sections.scss" />
   </ItemGroup>
 
   <ItemGroup>
