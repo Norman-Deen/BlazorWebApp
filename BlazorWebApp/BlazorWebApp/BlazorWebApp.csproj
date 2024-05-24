@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <Content Remove="compilerconfig.json" />
+    <Content Remove="wwwroot\scss\sections\_chat.scss" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,6 +26,7 @@
     <None Include="wwwroot\scss\sections\_courses-details.scss" />
     <None Include="wwwroot\scss\sections\_courses.scss" />
     <None Include="wwwroot\scss\sections\_features.scss" />
+    <None Include="wwwroot\scss\sections\_chat.scss" />
     <None Include="wwwroot\scss\sections\_footer.scss" />
     <None Include="wwwroot\scss\sections\_header.scss" />
     <None Include="wwwroot\scss\sections\_lightanddark.scss" />

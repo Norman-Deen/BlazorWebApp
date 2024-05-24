@@ -16,6 +16,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap");
 html, body {
   line-height: 160%;
   font-weight: 400;
@@ -1392,83 +1393,141 @@ footer .container .social-media {
   background-color: #3C68C5;
 }
 
-#subscribe {
-  background-color: #F3F6FF;
-  margin-top: 80px;
+.subscribe {
+  background-color: var(--color-gray-100);
 }
-#subscribe .container {
-  padding: 60px;
+.subscribe .container {
+  text-align: center;
+  display: grid;
+  padding: 40px 20px;
+  width: 100%;
+}
+@media (min-width: 768px) {
+  .subscribe .container {
+    padding: 80px 0;
+    text-align: left;
+    width: 60%;
+  }
+}
+@media (min-width: 992px) {
+  .subscribe .container {
+    width: 80%;
+  }
+}
+@media (min-width: 1400px) {
+  .subscribe .container {
+    padding: 40px 180px;
+  }
+}
+.subscribe .container .title {
   position: relative;
 }
+.subscribe .container .title h1 {
+  line-height: 160%;
+  font-weight: 400;
+  color: #565973;
+  font-family: "Manrope", sans-serif;
+  font-weight: 800;
+  color: #0B0F19;
+  font-size: 32px !important;
+  text-align: center;
+}
 @media (min-width: 992px) {
-  #subscribe .container {
-    padding: 60px 200px 0 200px;
+  .subscribe .container .title h1 {
+    text-align: left;
+    line-height: 160%;
+    font-weight: 400;
+    color: #565973;
+    font-family: "Manrope", sans-serif;
+    font-weight: 800;
+    color: #0B0F19;
+    font-size: 56px !important;
   }
 }
-#subscribe .container img {
+.subscribe .container .title .decorArrows {
+  display: none;
   position: absolute;
-  right: 10%;
-  top: 25%;
 }
-@media (min-width: 992px) {
-  #subscribe .container img {
-    position: absolute;
-    right: 31%;
-    top: 18%;
+@media (min-width: 1200px) {
+  .subscribe .container .title .decorArrows {
+    display: flex;
+    top: 0px;
+    right: 0px;
+    margin-top: 20px;
+    margin-right: 40px;
   }
 }
-#subscribe .container .grid-box {
+.subscribe .container form .checkbox-container {
   display: grid;
-  flex-grow: 1;
-  align-items: center;
-  grid-template-columns: repeat(2, 1fr);
-  padding-top: 40px;
-  padding-bottom: 40px;
-  gap: 10px;
+  padding: 20px;
+  text-align: center;
 }
 @media (min-width: 992px) {
-  #subscribe .container .grid-box {
-    grid-template-columns: repeat(4, 1fr);
+  .subscribe .container form .checkbox-container {
+    padding: 40px 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    text-align: left;
+    gap: 40px;
   }
 }
-#subscribe .container .grid-box h5 {
-  grid-area: 1/1/1/3;
+.subscribe .container form .checkbox-container h5 {
+  flex: 0.5;
 }
-@media (min-width: 992px) {
-  #subscribe .container .grid-box h5 {
-    grid-area: 1/1/3/2;
+.subscribe .container form .checkbox-container .checkboxes {
+  display: grid;
+  justify-content: center;
+  gap: 20px;
+}
+@media (min-width: 768px) {
+  .subscribe .container form .checkbox-container .checkboxes {
+    grid-template-columns: 1fr 1fr;
+    justify-content: left;
+    gap: 10px 60px;
   }
 }
-#subscribe .container .grid-box input {
-  margin-right: 10px;
+@media (min-width: 1200px) {
+  .subscribe .container form .checkbox-container .checkboxes {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 }
-#subscribe .container .subscribe-here {
+.subscribe .container form .checkbox-container .checkboxes .checkbox {
+  display: flex;
+}
+.subscribe .container form .checkbox-container .checkboxes .checkbox input[type=checkbox] {
+  transform: scale(1.5);
+  color: var(--color-gray-100);
+  margin-right: 12px;
+}
+.subscribe .container form .checkbox-container .checkboxes .checkbox :checked {
+  accent-color: var(--color-theme);
+}
+.subscribe .container form .inputbox-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 20;
+  gap: 20px;
 }
 @media (min-width: 992px) {
-  #subscribe .container .subscribe-here {
-    display: flex;
+  .subscribe .container form .inputbox-container {
     flex-direction: row;
+    justify-content: space-between;
   }
 }
-#subscribe .container .subscribe-here input {
-  flex: 1;
-  margin-bottom: 0px;
-  border: 1px solid #B4B7C9;
-  color: #B4B7C9;
-  padding: 5px 20px;
-  font-weight: 600;
-  font-size: 16px;
-  border-radius: 10px;
+.subscribe .container form .inputbox-container .inputgroup i {
+  left: 15px;
 }
 @media (min-width: 992px) {
-  #subscribe .container .subscribe-here input {
-    margin-right: 10px;
+  .subscribe .container form .inputbox-container .button {
+    display: flex;
+    height: 100%;
   }
+}
+.subscribe .container p {
+  padding-top: 20px;
+}
+.subscribe .container .asterisk {
+  color: var(--color-theme);
 }
 
 @media (min-width: 992px) {
@@ -1784,6 +1843,24 @@ content: '\2BBF';*/ /* Unicode chevron right symbol */
            top: -33.9%;
            height: 141.2%;
        }*/
+}
+
+.chat-bubble-right {
+  text-align: right;
+  background-color: #d1ffd6;
+  margin-left: auto;
+  border-radius: 15px;
+  padding: 10px;
+  max-width: 75%;
+}
+
+.chat-bubble-left {
+  text-align: left;
+  background-color: #FFFFFF;
+  margin-right: auto;
+  border-radius: 15px;
+  padding: 10px;
+  max-width: 75%;
 }
 
 #blazor-error-ui {
