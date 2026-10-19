@@ -1,71 +1,28 @@
-# ⚡ BlazorWebApp
+# BlazorWebApp — .NET 8 Full-Stack Coursework
 
-**BlazorWebApp** is a modern web application built with **Blazor WebAssembly** and **.NET 6**.
-It demonstrates a lightweight, fully client-side interactive frontend powered by Razor components.
+An educational Blazor solution developed during my full-stack studies at EC Utbildning. The repository contains an ASP.NET Core host and a separate Blazor WebAssembly client, rather than a standalone static frontend.
 
----
+## Structure
 
-## 🚀 Features
+- `BlazorWebApp/BlazorWebApp/`: server host, components, configuration, and static assets.
+- `BlazorWebApp/BlazorWebApp.Client/`: WebAssembly client project.
+- `BlazorWebApp.sln`: solution entry point.
 
-* 🌐 Built with **Blazor WebAssembly (.NET 6+)**
-* 🧩 Reusable Razor components for frontend logic
-* ⚙️ Ready for local development and GitHub Pages deployment
-* 📦 Clean Visual Studio Solution structure
-* 🔧 Easily extendable with APIs or additional services
+## Local development
 
----
-
-## 📁 Project Structure
-
-```
-BlazorWebApp/
-├── wwwroot/             # Static files (CSS, JS, images)
-├── Pages/               # UI Pages (Razor components)
-├── Shared/              # Reusable components
-├── Program.cs           # Application entry point
-├── BlazorWebApp.csproj  # Project file
-└── appsettings.json     # Configuration (if used)
-```
-
----
-
-## ▶️ Getting Started
-
-### Requirements
-
-* [.NET 6 SDK+](https://dotnet.microsoft.com/download)
-* [Visual Studio 2022+](https://visualstudio.microsoft.com/) with Blazor support
-
-### Run Locally
+Use the .NET 8 SDK. Review application configuration and provide the required local database/service settings before running.
 
 ```bash
-dotnet restore
-dotnet run
+git clone https://github.com/Norman-Deen/BlazorWebApp.git
+cd BlazorWebApp
+dotnet restore BlazorWebApp.sln
+dotnet run --project BlazorWebApp/BlazorWebApp/BlazorWebApp.csproj
 ```
 
-Then open your browser at:
-👉 `http://localhost:5000`
+Use the address printed by the host. Server-side features require an ASP.NET Core runtime; GitHub Pages alone cannot host them.
 
----
+## Scope
 
-## 🧠 Notes
+This is coursework demonstrating C#, Razor components, and web application integration. It is retained as part of my full-stack development foundation.
 
-* This project is ideal for learning and rapid prototyping with Blazor WASM.
-* You can integrate REST APIs, authentication, or backend services as needed.
-
----
-
-## 📄 License
-
-This project was created as part of a course assignment at EC Utbildning.
-It is available for educational or demonstration purposes only.
-🔧 Feel free to explore or adapt it for your own learning.
-
-
-
----
-
-Created by **Nour Tinawi**
-.NET Fullstack Developer | 3D Visual Designer
-
-
+[Nour Altinawi — Nourtin](https://nourtin.com/) · [Current real-time 3D work](https://github.com/Norman-Deen)
